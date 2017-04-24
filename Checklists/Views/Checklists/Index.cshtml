@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Checklists.Models.Checklist>
+
+@{
+    ViewBag.Title = "My Checklists";
+}
+
+<h2>My Checklists</h2>
+
+@if (!Model.Any())
+{
+    <p>
+        You don't have any checklists. <a href="#">Create a checklist.</a>
+    </p>
+}
+else
+{
+    <ul>
+        @foreach (var checklist in Model)
+        {
+            <li>@checklist.Name</li>
+        }        
+    </ul>
+}

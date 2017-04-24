@@ -25,6 +25,8 @@ namespace Checklists.Models
         {
         }
 
+        public DbSet<Checklist> Checklists { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
