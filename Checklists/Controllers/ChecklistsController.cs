@@ -24,7 +24,7 @@ namespace Checklists.Controllers
         {
             var userId = User.Identity.GetUserId();
             var checklists = _context.Checklists
-                .Where(c => c.AuthorId == userId)
+                .Where(c => c.AuthorId == userId && !c.IsDeleted)
                 .ToList();
 
             return View(checklists);
