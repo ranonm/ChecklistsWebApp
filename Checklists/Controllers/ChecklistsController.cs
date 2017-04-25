@@ -23,5 +23,24 @@ namespace Checklists.Controllers
 
             return View(checklists);
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Checklist checklist)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            _context.Checklists.Add(checklist);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

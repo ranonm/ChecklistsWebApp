@@ -1,0 +1,20 @@
+﻿@model Checklists.Models.Checklist
+
+@{
+    ViewBag.Title = "Create a new checklist";
+}
+
+<h2>Create a new checklist</h2>
+
+@using (Html.BeginForm("Create", "Checklists"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control"})
+        <span>
+            @Html.ValidationMessageFor(m => m.Name)
+        </span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+}
