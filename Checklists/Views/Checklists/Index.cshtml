@@ -6,18 +6,28 @@
 
 <h2>My Checklists</h2>
 
-@if (!Model.Any())
-{
-    <p>
-        You don't have any checklists. <a href="#">Create a checklist.</a>
-    </p>
-}
-else
-{
-    <ul>
-        @foreach (var checklist in Model)
+
+
+        @if (!Model.Any())
         {
-            <li>@checklist.Name</li>
-        }        
-    </ul>
-}
+            <p>
+                You don't have any checklists. <a href="#">Create a checklist.</a>
+            </p>
+        }
+        else
+        {
+            <ul class="list-unstyled" id="checklists">
+                @foreach (var checklist in Model)
+                {
+                    <li>
+                        @checklist.Name
+                        <ul class="list-inline">
+                            <li>
+
+                            </li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        }
+        

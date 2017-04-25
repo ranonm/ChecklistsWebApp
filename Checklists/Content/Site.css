@@ -22,3 +22,22 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/*
+    Custom styles
+*/
+
+#checklists>li {
+    border-bottom: 1px solid #eee;
+    display: block;
+    padding: 20px 0;
+}
+
+
+/*Bootstrap overrides*/
+@media (min-width: 768px) {
+    .container {
+        max-width: 730px;
+    }
+}

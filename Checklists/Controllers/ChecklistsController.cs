@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Checklists.Models;
+using Checklists.ViewModels;
 
 namespace Checklists.Controllers
 {
@@ -26,21 +27,54 @@ namespace Checklists.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new ChecklistFormViewModel();
+            return View("ChecklistForm", viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(Checklist checklist)
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(ChecklistFormViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View("ChecklistForm");
             }
 
-            _context.Checklists.Add(checklist);
+
+            if (viewModel.Id == 0)
+            {
+                var checklist = new Checklist
+                {
+                    Id = viewModel.Id,
+                    Name = viewModel.Name
+                };
+
+                _context.Checklists.Add(checklist);
+            }
+            else
+            {
+                var checklist = _context.Checklists.Single(c => c.Id == viewModel.Id);
+                checklist.Name = viewModel.Name;
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                return HttpNotFound();
+
+            var checklist = _context.Checklists.SingleOrDefault(c => c.Id == id);
+
+            if (checklist == null)
+                return HttpNotFound();
+
+            var viewModel = new ChecklistFormViewModel(checklist);
+
+            return View("ChecklistForm", viewModel);
         }
     }
 }
