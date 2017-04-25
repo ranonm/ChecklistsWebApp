@@ -11,7 +11,7 @@
         @if (!Model.Any())
         {
             <p>
-                You don't have any checklists. <a href="#">Create a checklist.</a>
+                You don't have any checklists. @Html.ActionLink("Create a checklist", "New").
             </p>
         }
         else

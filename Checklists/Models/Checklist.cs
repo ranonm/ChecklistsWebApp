@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -23,6 +24,11 @@ namespace Checklists.Models
         public DateTime DateAdded { get; set; }
 
         public bool IsDeleted { get; private set; }
+
+        [Required]
+        public string AuthorId { get; set; }
+
+        public ApplicationUser Author { get; set; }
 
         public void Delete()
         {

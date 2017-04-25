@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Checklists.Models;
 using Checklists.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace Checklists.Controllers
 {
+    [Authorize]
     public class ChecklistsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +22,15 @@ namespace Checklists.Controllers
         // GET: Checklists
         public ActionResult Index()
         {
-            var checklists = _context.Checklists.ToList();
+            var userId = User.Identity.GetUserId();
+            var checklists = _context.Checklists
+                .Where(c => c.AuthorId == userId)
+                .ToList();
 
             return View(checklists);
         }
 
-        public ActionResult Create()
+        public ActionResult New()
         {
             var viewModel = new ChecklistFormViewModel();
             return View("ChecklistForm", viewModel);
@@ -37,7 +42,7 @@ namespace Checklists.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("ChecklistForm");
+                return View("ChecklistForm", viewModel);
             }
 
 
@@ -46,14 +51,19 @@ namespace Checklists.Controllers
                 var checklist = new Checklist
                 {
                     Id = viewModel.Id,
-                    Name = viewModel.Name
+                    Name = viewModel.Name,
+                    AuthorId = User.Identity.GetUserId()
                 };
 
                 _context.Checklists.Add(checklist);
             }
             else
             {
-                var checklist = _context.Checklists.Single(c => c.Id == viewModel.Id);
+                var checklist = _context.Checklists.SingleOrDefault(c => c.Id == viewModel.Id);
+
+                if (checklist == null)
+                    return HttpNotFound();
+
                 checklist.Name = viewModel.Name;
             }
 

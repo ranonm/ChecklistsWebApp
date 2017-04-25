@@ -7,13 +7,13 @@ namespace Checklists.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddChecklistsEntries : IMigrationMetadata
+    public sealed partial class AddAuthorToChecklistTable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddChecklistsEntries));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAuthorToChecklistTable));
         
         string IMigrationMetadata.Id
         {
-            get { return "201704240933299_AddChecklistsEntries"; }
+            get { return "201704250919253_AddAuthorToChecklistTable"; }
         }
         
         string IMigrationMetadata.Source

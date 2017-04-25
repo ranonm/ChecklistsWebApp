@@ -214,13 +214,17 @@
     <Compile Include="Migrations\201704240930161_CreateChecklistsTable.Designer.cs">
       <DependentUpon>201704240930161_CreateChecklistsTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704240933299_AddChecklistsEntries.cs" />
-    <Compile Include="Migrations\201704240933299_AddChecklistsEntries.Designer.cs">
-      <DependentUpon>201704240933299_AddChecklistsEntries.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201704250215069_AddIsDeletedPropertyToChecklist.cs" />
     <Compile Include="Migrations\201704250215069_AddIsDeletedPropertyToChecklist.Designer.cs">
       <DependentUpon>201704250215069_AddIsDeletedPropertyToChecklist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704250919253_AddAuthorToChecklistTable.cs" />
+    <Compile Include="Migrations\201704250919253_AddAuthorToChecklistTable.Designer.cs">
+      <DependentUpon>201704250919253_AddAuthorToChecklistTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704250943130_RequireAuthorForChecklist.cs" />
+    <Compile Include="Migrations\201704250943130_RequireAuthorForChecklist.Designer.cs">
+      <DependentUpon>201704250943130_RequireAuthorForChecklist.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -317,11 +321,14 @@
     <EmbeddedResource Include="Migrations\201704240930161_CreateChecklistsTable.resx">
       <DependentUpon>201704240930161_CreateChecklistsTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704240933299_AddChecklistsEntries.resx">
-      <DependentUpon>201704240933299_AddChecklistsEntries.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704250215069_AddIsDeletedPropertyToChecklist.resx">
       <DependentUpon>201704250215069_AddIsDeletedPropertyToChecklist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704250919253_AddAuthorToChecklistTable.resx">
+      <DependentUpon>201704250919253_AddAuthorToChecklistTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704250943130_RequireAuthorForChecklist.resx">
+      <DependentUpon>201704250943130_RequireAuthorForChecklist.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
