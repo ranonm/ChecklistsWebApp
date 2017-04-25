@@ -22,6 +22,11 @@ namespace Checklists.Models
         [Required]
         public DateTime DateAdded { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; private set; }
+
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
     }
 }
