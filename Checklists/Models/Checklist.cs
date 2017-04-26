@@ -12,6 +12,7 @@ namespace Checklists.Models
         public Checklist()
         {
             DateAdded = DateTime.Now;
+            TodoItems = new List<TodoItem>();
         }
 
         public int Id { get; set; }
@@ -29,6 +30,8 @@ namespace Checklists.Models
         public string AuthorId { get; set; }
 
         public ApplicationUser Author { get; set; }
+
+        public ICollection<TodoItem> TodoItems { get; set; }
 
         public void Delete()
         {
