@@ -8,26 +8,72 @@
 
 
 
-        @if (!Model.Any())
+@if (!Model.Any())
+{
+    <p>
+        You don't have any checklists. @Html.ActionLink("Create a checklist", "New").
+    </p>
+}
+else
+{
+    <ul class="list-unstyled" id="checklists">
+        @foreach (var checklist in Model)
         {
-            <p>
-                You don't have any checklists. @Html.ActionLink("Create a checklist", "New").
-            </p>
-        }
-        else
-        {
-            <ul class="list-unstyled" id="checklists">
-                @foreach (var checklist in Model)
-                {
+            <li>
+                @checklist.Name
+                <ul class="list-inline text-right">
                     <li>
-                        @checklist.Name
-                        <ul class="list-inline">
-                            <li>
-
-                            </li>
-                        </ul>
+                        <a href="@Url.Action("Edit", new {Id = @checklist.Id})" title="Edit">
+                            <span class="glyphicon glyphicon-pencil"></span>  
+                        </a>
                     </li>
-                }
-            </ul>
+                    <li>
+                        <a href="#" data-checklist-id="@checklist.Id" class="js-delete" title="Delete">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         }
-        
+    </ul>
+}
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            $("#checklists").on("click",
+                ".js-delete",
+                function () {
+                    var button = $(this);
+
+                    bootbox.confirm({
+                        message: "Are you sure that you want to delete the checklist?",
+                        buttons: {
+                            cancel: {
+                                label: "No",
+                                className: "btn-link"
+                            },
+                            confirm: {
+                                label: "Yes",
+                                className: "btn-danger"
+                            }
+                        },
+                        callback: function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "api/checklists/" + button.attr("data-checklist-id"),
+                                    method: "DELETE",
+                                    success: function () {
+                                        button.parents("li").remove();
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+
+                });
+        });
+    </script>
+}        
