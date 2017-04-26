@@ -203,6 +203,7 @@
     <Compile Include="Controllers\ChecklistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TodoItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +230,10 @@
     <Compile Include="Migrations\201704260939262_CreateTodoItemEntity.cs" />
     <Compile Include="Migrations\201704260939262_CreateTodoItemEntity.Designer.cs">
       <DependentUpon>201704260939262_CreateTodoItemEntity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704260945064_AddTodoItemsToTable.cs" />
+    <Compile Include="Migrations\201704260945064_AddTodoItemsToTable.Designer.cs">
+      <DependentUpon>201704260945064_AddTodoItemsToTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -302,6 +307,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Checklists\Index.cshtml" />
     <Content Include="Views\Checklists\ChecklistForm.cshtml" />
+    <Content Include="Views\TodoItems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -339,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704260939262_CreateTodoItemEntity.resx">
       <DependentUpon>201704260939262_CreateTodoItemEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704260945064_AddTodoItemsToTable.resx">
+      <DependentUpon>201704260945064_AddTodoItemsToTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

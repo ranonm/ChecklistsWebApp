@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Checklists.Models.TodoItem>
+
+@{
+    ViewBag.Title = "Todo items";
+}
+
+<h2>Todo items</h2>
+
+@if (Model.Any())
+{
+    <form>
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    <input type="checkbox" value="@item.Checked" data-item-id="@item.Id" />
+                    @item.Title
+                </li>
+            }
+        </ul>
+    </form>
+}
+else
+{
+    <p>There are no to-do items. <a href="#">Create a new to-do item</a>.</p>
+}
