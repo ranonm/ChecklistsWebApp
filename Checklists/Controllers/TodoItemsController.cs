@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,6 +16,22 @@ namespace Checklists.Controllers
         public TodoItemsController()
         {
             _context = new ApplicationDbContext();
+        }
+
+        [Route("checklists/{id}/items")]
+        public ActionResult Index(int? id)
+        {
+            if (id == null)
+                return HttpNotFound();
+
+            var checklist = _context.Checklists
+                .Include(c => c.TodoItems)
+                .SingleOrDefault(c => c.Id == id);
+
+            if (checklist == null)
+                return HttpNotFound();
+
+            return View(checklist);
         }
 
         [Route("checklists/{id}/items/new")]

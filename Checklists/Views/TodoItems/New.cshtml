@@ -26,7 +26,7 @@
             <button class="btn btn-primary" type="submit">Save</button>
         </li>
         <li>
-            @Html.ActionLink("Cancel", "items", "Checklists", new{Id = @Model.ChecklistId}, new {@class="btn btn-link"})
+            @Html.ActionLink("Cancel", "Index", "TodoItems", new{Id = @Model.ChecklistId}, new {@class="btn btn-link"})
         </li>
     </ul>
 }

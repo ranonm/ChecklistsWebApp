@@ -29,7 +29,7 @@ else
         @foreach (var checklist in Model)
         {
             <li>
-                @Html.ActionLink(@checklist.Name, "Items", "Checklists", new {Id = @checklist.Id}, new {})
+                @Html.ActionLink(@checklist.Name, "Index", "TodoItems", new {Id = @checklist.Id}, new {})
                 <ul class="list-inline pull-right">
                     <li>
                         <a href="@Url.Action("Edit", new {Id = @checklist.Id})" title="Edit">

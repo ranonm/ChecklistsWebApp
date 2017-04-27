@@ -87,21 +87,5 @@ namespace Checklists.Controllers
 
             return View("ChecklistForm", viewModel);
         }
-
-        [Route("checklists/{id}/items")]
-        public ActionResult Items(int? id)
-        {
-            if (id == null)
-                return HttpNotFound();
-
-            var checklist = _context.Checklists
-                .Include(c => c.TodoItems)
-                .SingleOrDefault(c => c.Id == id);
-
-            if (checklist == null)
-                return HttpNotFound();
-
-            return View(checklist);
-        }
     }
 }
