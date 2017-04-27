@@ -1,0 +1,23 @@
+﻿@model Checklists.Models.TodoItem
+
+@{
+    ViewBag.Title = "New to-do item";
+}
+
+<h2>New To-do item</h2>
+
+@using (Html.BeginForm("Save", "TodoItems"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.Title)
+        @Html.TextBoxFor(m => m.Title, new {@class = "form-control"})
+        <span>
+            @Html.ValidationMessageFor(m => m.Title)
+        </span>
+    </div>
+
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ChecklistId)
+
+    <button class="btn btn-primary" type="submit">Save</button>
+}
