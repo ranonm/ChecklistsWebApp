@@ -65,7 +65,7 @@ namespace Checklists.Controllers
             _context.TodoItems.Add(item);
             _context.SaveChanges();
 
-            return RedirectToAction("items", "Checklists", new { Id = item.ChecklistId });
+            return RedirectToAction("Index", new { Id = item.ChecklistId });
         }
     }
 }
