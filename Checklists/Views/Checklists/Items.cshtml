@@ -1,16 +1,16 @@
-﻿@model IEnumerable<Checklists.Models.TodoItem>
+﻿@model Checklists.Models.Checklist
 
 @{
-    ViewBag.Title = "Todo items";
+    ViewBag.Title = Model.Name;
 }
 
-<h2>Todo items</h2>
+<h2>@Model.Name</h2>
 
-@if (Model.Any())
+@if (Model.TodoItems.Any())
 {
     <form>
         <ul class="list-group">
-            @foreach (var item in Model)
+            @foreach (var item in Model.TodoItems)
             {
                 <li class="list-group-item">
                     <input type="checkbox" value="@item.Checked" data-item-id="@item.Id" />

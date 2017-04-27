@@ -203,7 +203,6 @@
     <Compile Include="Controllers\ChecklistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\TodoItemsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -307,7 +306,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Checklists\Index.cshtml" />
     <Content Include="Views\Checklists\ChecklistForm.cshtml" />
-    <Content Include="Views\TodoItems\Index.cshtml" />
+    <Content Include="Views\Checklists\Items.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

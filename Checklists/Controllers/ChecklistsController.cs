@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -85,6 +86,19 @@ namespace Checklists.Controllers
             var viewModel = new ChecklistFormViewModel(checklist);
 
             return View("ChecklistForm", viewModel);
+        }
+
+        [Route("checklists/{id}/items")]
+        public ActionResult Items(int? id)
+        {
+            if (id == null)
+                return HttpNotFound();
+
+            var checklist = _context.Checklists
+                .Include(c => c.TodoItems)
+                .Single(c => c.Id == id);
+
+            return View(checklist);
         }
     }
 }
