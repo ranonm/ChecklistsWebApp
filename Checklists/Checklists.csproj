@@ -200,6 +200,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Apis\ChecklistsController.cs" />
+    <Compile Include="Controllers\Apis\TodoItemsController.cs" />
     <Compile Include="Controllers\ChecklistsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />

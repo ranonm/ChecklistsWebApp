@@ -25,5 +25,17 @@ namespace Checklists.Models
 
         public int ChecklistId { get; set; }
         public Checklist Checklist { get; set; }
+
+        public void Check()
+        {
+            if (!Checked)
+                Checked = true;
+        }
+
+        public void Uncheck()
+        {
+            if (Checked)
+                Checked = false;
+        }
     }
 }

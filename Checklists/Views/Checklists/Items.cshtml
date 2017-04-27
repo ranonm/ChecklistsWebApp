@@ -8,12 +8,12 @@
 
 @if (Model.TodoItems.Any())
 {
-    <form>
+    <form id="todo-items">
         <ul class="list-group">
             @foreach (var item in Model.TodoItems)
             {
                 <li class="list-group-item">
-                    <input type="checkbox" value="@item.Checked" data-item-id="@item.Id" />
+                    <input type="checkbox" class="js-check-toggle" checked="@item.Checked" data-item-id="@item.Id" />
                     @item.Title
                 </li>
             }
@@ -23,4 +23,36 @@
 else
 {
     <p>There are no to-do items. <a href="#">Create a new to-do item</a>.</p>
+}
+
+
+@section scripts {
+    <script>
+        $(document).ready(function() {
+            $("#todo-items").on("change",
+                ".js-check-toggle",
+                function() {
+
+                    var checkbox = $(this);
+
+                    if (checkbox.attr("checked") === "checked") {
+                        $.ajax({
+                            url: "/api/todoitems/" + checkbox.attr("data-item-id") + "/check",
+                            method: "DELETE",
+                            success: function () {
+                                checkbox.removeAttr("checked");
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: "/api/todoitems/" + checkbox.attr("data-item-id") + "/check",
+                            method: "PUT",
+                            success: function () {
+                                checkbox.attr("checked", "checked");
+                            }
+                        });
+                    }
+                });
+        });
+    </script>
 }
