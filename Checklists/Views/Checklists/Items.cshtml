@@ -4,7 +4,16 @@
     ViewBag.Title = Model.Name;
 }
 
-<h2>@Model.Name</h2>
+<div class="page-header">
+    <h2>
+        @Model.Name
+        <small class="pull-right">
+            <a href="@Url.Action("New", "TodoItems")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-plus"></span> Add item
+            </a>
+        </small>
+    </h2>
+</div>
 
 @if (Model.TodoItems.Any())
 {
@@ -22,7 +31,7 @@
 }
 else
 {
-    <p>There are no to-do items. <a href="#">Create a new to-do item</a>.</p>
+    <p>There are no to-do items. <a href="@Url.Action("New", "TodoItems")">Create a new to-do item</a>.</p>
 }
 
 

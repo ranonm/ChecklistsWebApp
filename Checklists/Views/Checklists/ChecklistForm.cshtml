@@ -4,7 +4,9 @@
     ViewBag.Title = Model.Title;
 }
 
-<h2>@Model.Title</h2>
+<div class="page-header">
+    <h2>@Model.Title</h2>
+</div>
 
 @using (Html.BeginForm("Save", "Checklists"))
 {
@@ -19,5 +21,13 @@
     @Html.HiddenFor(m => m.Id);
     @Html.AntiForgeryToken()
     
-    <button type="submit" class="btn btn-primary">Save</button>
+    <ul class="list-inline">
+        <li>
+            <button type="submit" class="btn btn-primary">Save</button>        
+        </li>
+        <li>
+            @Html.ActionLink("Cancel", "Index", "Checklists", new {@class = "btn btn-link"})
+        </li>
+    </ul>
+    
 }

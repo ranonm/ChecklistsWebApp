@@ -4,7 +4,16 @@
     ViewBag.Title = "My Checklists";
 }
 
-<h2>My Checklists</h2>
+<div class="page-header">
+    <h2>
+        My Checklists
+        <small class="pull-right">
+            <a href="@Url.Action("New", "Checklists")" class="btn btn-primary">
+                <span class="glyphicon glyphicon-file"></span> Create new list
+            </a>
+        </small>
+    </h2>
+</div>
 
 
 

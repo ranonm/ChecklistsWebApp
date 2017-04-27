@@ -1,10 +1,12 @@
 ﻿@model Checklists.Models.TodoItem
 
 @{
-    ViewBag.Title = "New to-do item";
+    ViewBag.Title = "New item";
 }
 
-<h2>New To-do item</h2>
+<div class="page-header">
+    <h2>New Item</h2>
+</div>
 
 @using (Html.BeginForm("Save", "TodoItems"))
 {
@@ -19,5 +21,12 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.ChecklistId)
 
-    <button class="btn btn-primary" type="submit">Save</button>
+    <ul class="list-inline">
+        <li>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </li>
+        <li>
+            @Html.ActionLink("Cancel", "items", "Checklists", new{Id = @Model.ChecklistId}, new {@class="btn btn-link"})
+        </li>
+    </ul>
 }

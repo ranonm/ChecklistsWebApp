@@ -22,7 +22,7 @@ namespace Checklists.ViewModels
 
         public string Title
         {
-            get { return Id == 0 ? "Create a new checklist" : "Modify checklist name"; }
+            get { return Id == 0 ? "New checklist" : "Modify checklist name"; }
         }
 
         public int Id { get; set; }
