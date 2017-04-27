@@ -96,7 +96,10 @@ namespace Checklists.Controllers
 
             var checklist = _context.Checklists
                 .Include(c => c.TodoItems)
-                .Single(c => c.Id == id);
+                .SingleOrDefault(c => c.Id == id);
+
+            if (checklist == null)
+                return HttpNotFound();
 
             return View(checklist);
         }
