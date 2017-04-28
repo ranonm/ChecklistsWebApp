@@ -26,6 +26,13 @@ namespace Checklists.Models
         public int ChecklistId { get; set; }
         public Checklist Checklist { get; set; }
 
+        public bool IsDeleted { get; set; }
+
+        public void Delete()
+        {
+            IsDeleted = true;
+        }
+
         public void Check()
         {
             if (!Checked)

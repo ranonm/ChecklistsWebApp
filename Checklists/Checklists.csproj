@@ -236,6 +236,10 @@
     <Compile Include="Migrations\201704260945064_AddTodoItemsToTable.Designer.cs">
       <DependentUpon>201704260945064_AddTodoItemsToTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704280009125_AddIsDeletedPropertyToToDoItemTable.cs" />
+    <Compile Include="Migrations\201704280009125_AddIsDeletedPropertyToToDoItemTable.Designer.cs">
+      <DependentUpon>201704280009125_AddIsDeletedPropertyToToDoItemTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -351,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704260945064_AddTodoItemsToTable.resx">
       <DependentUpon>201704260945064_AddTodoItemsToTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704280009125_AddIsDeletedPropertyToToDoItemTable.resx">
+      <DependentUpon>201704280009125_AddIsDeletedPropertyToToDoItemTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

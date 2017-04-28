@@ -31,6 +31,11 @@
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
                         </li>
+                        <li>
+                            <a href="#" class="js-delete" data-item-id="@item.Id">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             }
@@ -56,7 +61,7 @@ else
                         $.ajax({
                             url: "/api/todoitems/" + checkbox.attr("data-item-id") + "/check",
                             method: "DELETE",
-                            success: function () {
+                            success: function() {
                                 checkbox.removeAttr("checked");
                             }
                         });
@@ -64,11 +69,41 @@ else
                         $.ajax({
                             url: "/api/todoitems/" + checkbox.attr("data-item-id") + "/check",
                             method: "PUT",
-                            success: function () {
+                            success: function() {
                                 checkbox.attr("checked", "checked");
                             }
                         });
                     }
+                });
+
+            $("#todo-items").on("click",
+                ".js-delete",
+                function() {
+                    var button = $(this);
+                    bootbox.confirm({
+                        message: "Are you sure that you want to delete the to-do item?",
+                        buttons: {
+                            confirm: {
+                                label: "Yes",
+                                className: "btn-danger"
+                            },
+                            cancel: {
+                                label: "No",
+                                className: "btn-link"
+                            }
+                        },
+                        callback: function(result) {
+                            if (result) {
+                                $.ajax({
+                                    url: "/api/todoitems/" + button.attr("data-item-id"),
+                                    method: "DELETE",
+                                    success: function() {
+                                        button.parents("li.list-group-item").remove();
+                                    }
+                                });
+                            }
+                        }
+                    })
                 });
         });
     </script>

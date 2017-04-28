@@ -20,6 +20,26 @@ namespace Checklists.Controllers.Apis
             _context = new ApplicationDbContext();
         }
 
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            var item = _context.TodoItems
+                .Include(i => i.Checklist)
+                .SingleOrDefault(i => i.Id == id);
+
+            if (item == null)
+                return NotFound();
+
+            if (item.Checklist.AuthorId != User.Identity.GetUserId())
+                return Unauthorized();
+
+            item.Delete();
+
+            _context.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
         [HttpPut]
         [Route("api/todoitems/{id}/check")]
         public IHttpActionResult Check(int? id)
