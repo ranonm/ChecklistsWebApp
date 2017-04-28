@@ -33,6 +33,11 @@ namespace Checklists.Models
 
         public ICollection<TodoItem> TodoItems { get; set; }
 
+        public IEnumerable<TodoItem> ActiveTodoItems
+        {
+            get { return TodoItems.Where(i => !i.IsDeleted); }
+        }
+
         public void Delete()
         {
             IsDeleted = true;

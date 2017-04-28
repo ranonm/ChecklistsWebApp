@@ -15,11 +15,11 @@
     </h2>
 </div>
 
-@if (Model.TodoItems.Any())
+@if (Model.ActiveTodoItems.Any())
 {
     <form id="todo-items">
         <ul class="list-group">
-            @foreach (var item in Model.TodoItems)
+            @foreach (var item in Model.ActiveTodoItems)
             {
                 <li class="list-group-item">
                     <input type="checkbox" class="js-check-toggle" checked="@item.Checked" data-item-id="@item.Id" />

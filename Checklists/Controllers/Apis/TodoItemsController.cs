@@ -55,6 +55,9 @@ namespace Checklists.Controllers.Apis
             if (todoItem.Checklist.AuthorId != User.Identity.GetUserId())
                 return Unauthorized();
 
+            if (todoItem.IsDeleted)
+                return BadRequest("Cannot check a deleted item");
+
             todoItem.Check();
 
             _context.SaveChanges();
@@ -76,6 +79,9 @@ namespace Checklists.Controllers.Apis
 
             if (todoItem.Checklist.AuthorId != User.Identity.GetUserId())
                 return Unauthorized();
+
+            if (todoItem.IsDeleted)
+                return BadRequest("Cannot uncheck a deleted item");
 
             todoItem.Uncheck();
 
