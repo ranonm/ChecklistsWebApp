@@ -24,6 +24,14 @@
                 <li class="list-group-item">
                     <input type="checkbox" class="js-check-toggle" checked="@item.Checked" data-item-id="@item.Id" />
                     @item.Title
+                    
+                    <ul class="list-inline pull-right">
+                        <li>
+                            <a href="@Url.Action("Edit", new {ChecklistId = @item.ChecklistId, Id = @item.Id})">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             }
         </ul>

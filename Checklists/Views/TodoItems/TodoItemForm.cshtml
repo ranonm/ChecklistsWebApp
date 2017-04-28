@@ -1,11 +1,11 @@
-﻿@model Checklists.Models.TodoItem
+﻿@model Checklists.ViewModels.TodoItemFormViewModel
 
 @{
-    ViewBag.Title = "New item";
+    ViewBag.Title = Model.PageTitle;
 }
 
 <div class="page-header">
-    <h2>New Item</h2>
+    <h2>@Model.PageTitle</h2>
 </div>
 
 @using (Html.BeginForm("Save", "TodoItems"))
@@ -19,6 +19,7 @@
     </div>
 
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Id)
     @Html.HiddenFor(m => m.ChecklistId)
 
     <ul class="list-inline">

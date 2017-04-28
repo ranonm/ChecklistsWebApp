@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Checklists.Models;
+using Checklists.ViewModels;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Checklists.Models;
-using Checklists.ViewModels;
 
 namespace Checklists.Controllers
 {
@@ -50,7 +47,7 @@ namespace Checklists.Controllers
                 ChecklistId = (int)id
             };
 
-            return View(todoItem);
+            return View("TodoItemForm", new TodoItemFormViewModel(todoItem));
         }
 
         [HttpPost]
@@ -59,13 +56,39 @@ namespace Checklists.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("New", item);
+                return View("TodoItemForm", new TodoItemFormViewModel(item));
             }
 
-            _context.TodoItems.Add(item);
+            if (item.Id == 0)
+            {
+                _context.TodoItems.Add(item);
+            }
+            else
+            {
+                var itemFromDb =
+                    _context.TodoItems.SingleOrDefault(i => i.Id == item.Id && i.ChecklistId == item.ChecklistId);
+
+                if (itemFromDb == null)
+                    return HttpNotFound();
+
+                itemFromDb.Title = item.Title;
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", new { Id = item.ChecklistId });
+        }
+
+        [Route("checklists/{checklistId}/items/edit/{id}")]
+        public ActionResult Edit(int checklistId, int id)
+        {
+            var item = _context.TodoItems
+                .SingleOrDefault(i => i.Id == id && i.ChecklistId == checklistId);
+
+            if (item == null)
+                return HttpNotFound();
+
+            return View("TodoItemForm", new TodoItemFormViewModel(item));
         }
     }
 }
