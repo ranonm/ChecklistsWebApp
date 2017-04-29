@@ -244,6 +244,14 @@
     <Compile Include="Migrations\201704291021150_RenameTodoItemsToTasks.Designer.cs">
       <DependentUpon>201704291021150_RenameTodoItemsToTasks.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201704292049544_AddFullNamePropertyToApplicationUser.cs" />
+    <Compile Include="Migrations\201704292049544_AddFullNamePropertyToApplicationUser.Designer.cs">
+      <DependentUpon>201704292049544_AddFullNamePropertyToApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704292323394_AddConstraintsToApplicationUserFullName.cs" />
+    <Compile Include="Migrations\201704292323394_AddConstraintsToApplicationUserFullName.Designer.cs">
+      <DependentUpon>201704292323394_AddConstraintsToApplicationUserFullName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -368,6 +376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201704291021150_RenameTodoItemsToTasks.resx">
       <DependentUpon>201704291021150_RenameTodoItemsToTasks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704292049544_AddFullNamePropertyToApplicationUser.resx">
+      <DependentUpon>201704292049544_AddFullNamePropertyToApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704292323394_AddConstraintsToApplicationUserFullName.resx">
+      <DependentUpon>201704292323394_AddConstraintsToApplicationUserFullName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
