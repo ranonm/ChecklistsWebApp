@@ -3,14 +3,14 @@ using Checklists.Models;
 
 namespace Checklists.ViewModels
 {
-    public class TodoItemFormViewModel
+    public class TaskFormViewModel
     {
-        public TodoItemFormViewModel()
+        public TaskFormViewModel()
         {
             Id = 0;
         }
 
-        public TodoItemFormViewModel(TodoItem item)
+        public TaskFormViewModel(Task item)
         {
             Id = item.Id;
             Title = item.Title;
@@ -19,7 +19,7 @@ namespace Checklists.ViewModels
 
         public string PageTitle
         {
-            get { return Id == 0 ? "New Item" : "Modify Item"; }
+            get { return Id == 0 ? "New Task" : "Modify Task"; }
         }
 
         public int Id { get; set; }

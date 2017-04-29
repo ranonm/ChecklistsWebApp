@@ -26,19 +26,19 @@
             </div>
         </div>
     </div>
-<div class="container body-content">
+    <div class="container body-content">
     
-    @RenderBody()
-
-</div>
-    
-<footer>
-    <div class="container">
-        <p>&copy; @DateTime.Now.Year - Checklists</p>
+        @RenderBody()
+        
     </div>
-</footer>
-
-@Scripts.Render("~/bundles/jquery")
+    
+    <footer>
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year - Checklists</p>
+        </div>
+    </footer>
+    
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

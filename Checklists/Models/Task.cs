@@ -6,9 +6,9 @@ using System.Web;
 
 namespace Checklists.Models
 {
-    public class TodoItem
+    public class Task
     {
-        public TodoItem()
+        public Task()
         {
             DateAdded = DateTime.Now;
         }

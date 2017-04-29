@@ -11,11 +11,11 @@ using Microsoft.AspNet.Identity;
 namespace Checklists.Controllers.Apis
 {
     [Authorize]
-    public class TodoItemsController : ApiController
+    public class TasksController : ApiController
     {
         private readonly ApplicationDbContext _context;
 
-        public TodoItemsController()
+        public TasksController()
         {
             _context = new ApplicationDbContext();
         }
@@ -23,7 +23,7 @@ namespace Checklists.Controllers.Apis
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            var item = _context.TodoItems
+            var item = _context.Tasks
                 .Include(i => i.Checklist)
                 .SingleOrDefault(i => i.Id == id);
 
@@ -41,24 +41,24 @@ namespace Checklists.Controllers.Apis
         }
 
         [HttpPut]
-        [Route("api/todoitems/{id}/check")]
+        [Route("api/tasks/{id}/check")]
         public IHttpActionResult Check(int? id)
         {
             if (id == null)
                 return BadRequest("Requires an id for the to-do item");
 
-            var todoItem = _context.TodoItems.Include(i => i.Checklist).SingleOrDefault(i => i.Id == id);
+            var task = _context.Tasks.Include(i => i.Checklist).SingleOrDefault(i => i.Id == id);
 
-            if (todoItem == null)
+            if (task == null)
                 return NotFound();
 
-            if (todoItem.Checklist.AuthorId != User.Identity.GetUserId())
+            if (task.Checklist.AuthorId != User.Identity.GetUserId())
                 return Unauthorized();
 
-            if (todoItem.IsDeleted)
+            if (task.IsDeleted)
                 return BadRequest("Cannot check a deleted item");
 
-            todoItem.Check();
+            task.Check();
 
             _context.SaveChanges();
 
@@ -66,24 +66,24 @@ namespace Checklists.Controllers.Apis
         }
 
         [HttpDelete]
-        [Route("api/todoitems/{id}/check")]
+        [Route("api/tasks/{id}/check")]
         public IHttpActionResult Uncheck(int? id)
         {
             if (id == null)
                 return BadRequest("Requires an id for the to-do item");
 
-            var todoItem = _context.TodoItems.Include(i => i.Checklist).SingleOrDefault(i => i.Id == id);
+            var task = _context.Tasks.Include(i => i.Checklist).SingleOrDefault(i => i.Id == id);
 
-            if (todoItem == null)
+            if (task == null)
                 return NotFound();
 
-            if (todoItem.Checklist.AuthorId != User.Identity.GetUserId())
+            if (task.Checklist.AuthorId != User.Identity.GetUserId())
                 return Unauthorized();
 
-            if (todoItem.IsDeleted)
+            if (task.IsDeleted)
                 return BadRequest("Cannot uncheck a deleted item");
 
-            todoItem.Uncheck();
+            task.Uncheck();
 
             _context.SaveChanges();
 

@@ -12,7 +12,7 @@ namespace Checklists.Models
         public Checklist()
         {
             DateAdded = DateTime.Now;
-            TodoItems = new List<TodoItem>();
+            Tasks = new List<Task>();
         }
 
         public int Id { get; set; }
@@ -31,11 +31,11 @@ namespace Checklists.Models
 
         public ApplicationUser Author { get; set; }
 
-        public ICollection<TodoItem> TodoItems { get; set; }
+        public ICollection<Task> Tasks { get; set; }
 
-        public IEnumerable<TodoItem> ActiveTodoItems
+        public IEnumerable<Task> ActiveTasks
         {
-            get { return TodoItems.Where(i => !i.IsDeleted); }
+            get { return Tasks.Where(i => !i.IsDeleted); }
         }
 
         public void Delete()

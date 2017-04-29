@@ -11,7 +11,7 @@ namespace Checklists.Models
         }
 
         public DbSet<Checklist> Checklists { get; set; }
-        public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
         public static ApplicationDbContext Create()
         {

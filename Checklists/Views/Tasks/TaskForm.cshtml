@@ -1,4 +1,4 @@
-﻿@model Checklists.ViewModels.TodoItemFormViewModel
+﻿@model Checklists.ViewModels.TaskFormViewModel
 
 @{
     ViewBag.Title = Model.PageTitle;
@@ -8,7 +8,7 @@
     <h2>@Model.PageTitle</h2>
 </div>
 
-@using (Html.BeginForm("Save", "TodoItems"))
+@using (Html.BeginForm("Save", "Tasks"))
 {
     <div class="form-group">
         @Html.LabelFor(m => m.Title)
@@ -27,7 +27,7 @@
             <button class="btn btn-primary" type="submit">Save</button>
         </li>
         <li>
-            @Html.ActionLink("Cancel", "Index", "TodoItems", new{Id = @Model.ChecklistId}, new {@class="btn btn-link"})
+            @Html.ActionLink("Cancel", "Index", "Tasks", new{Id = @Model.ChecklistId}, new {@class="btn btn-link"})
         </li>
     </ul>
 }
