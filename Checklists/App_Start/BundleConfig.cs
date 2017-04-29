@@ -26,6 +26,7 @@ namespace Checklists
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-paper.css",
                       "~/Content/site.css"));
         }
     }
