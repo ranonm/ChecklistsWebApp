@@ -1,4 +1,4 @@
-﻿@model Checklists.Models.Checklist
+﻿@model Checklists.ViewModels.TaskListingViewModel
 
 @{
     ViewBag.Title = Model.Name;
@@ -8,18 +8,18 @@
     <h2>
         @Model.Name
         <small class="pull-right">
-            <a href="@Url.Action("New", "Tasks", new {ChecklistId=@Model.Id})" class="btn btn-primary">
+            <a href="@Url.Action("New", "Tasks", new {ChecklistId=@Model.ChecklistId})" class="btn btn-primary">
                 <span class="glyphicon glyphicon-plus"></span> Add Task
             </a>
         </small>
     </h2>
 </div>
 
-@if (Model.ActiveTasks.Any())
+@if (Model.Tasks.Any())
 {
     <form id="todo-items">
         <ul class="list-group">
-            @foreach (var item in Model.ActiveTasks)
+            @foreach (var item in Model.Tasks)
             {
                 <li class="list-group-item">
                     <input type="checkbox" class="js-check-toggle" checked="@item.Checked" data-item-id="@item.Id" />

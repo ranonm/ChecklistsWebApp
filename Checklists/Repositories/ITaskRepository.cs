@@ -1,4 +1,5 @@
-﻿using Checklists.Models;
+﻿using System.Collections.Generic;
+using Checklists.Models;
 
 namespace Checklists.Repositories
 {
@@ -7,5 +8,6 @@ namespace Checklists.Repositories
         void Add(Task task);
         Task GetTaskFromChecklist(int checklistId, int taskId);
         Task GetTaskWithChecklist(int taskId);
+        IEnumerable<Task> GetTasksFromChecklist(int checklistId);
     }
 }

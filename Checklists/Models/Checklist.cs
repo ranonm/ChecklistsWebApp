@@ -33,11 +33,6 @@ namespace Checklists.Models
 
         public ICollection<Task> Tasks { get; set; }
 
-        public IEnumerable<Task> ActiveTasks
-        {
-            get { return Tasks.Where(i => !i.IsDeleted); }
-        }
-
         public void Delete()
         {
             IsDeleted = true;

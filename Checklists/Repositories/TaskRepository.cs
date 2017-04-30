@@ -24,7 +24,8 @@ namespace Checklists.Repositories
         public Task GetTaskFromChecklist(int checklistId, int taskId)
         {
             return _context.Tasks
-                .SingleOrDefault(t => t.Id == taskId && t.ChecklistId == checklistId);
+                .Include(t => t.Checklist)
+                .SingleOrDefault(t => t.Id == taskId && t.ChecklistId == checklistId && !t.IsDeleted);
         }
 
         public Task GetTaskWithChecklist(int taskId)
@@ -32,6 +33,13 @@ namespace Checklists.Repositories
             return _context.Tasks
                 .Include(t => t.Checklist)
                 .SingleOrDefault(t => t.Id == taskId);
+        }
+
+        public IEnumerable<Task> GetTasksFromChecklist(int checklistId)
+        {
+            return _context.Tasks
+                .Where(t => t.ChecklistId == checklistId && !t.IsDeleted)
+                .ToList();
         }
     }
 }

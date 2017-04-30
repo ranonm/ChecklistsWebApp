@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Checklists.Repositories;
+using Microsoft.AspNet.Identity;
 
 namespace Checklists.Controllers
 {
@@ -26,12 +27,17 @@ namespace Checklists.Controllers
             if (checklistId == null)
                 return HttpNotFound();
 
-            var checklist = _checklistRepository.GetChecklistWithTasks(checklistId.Value);
+            var checklist = _checklistRepository.GetChecklist(checklistId.Value);
 
             if (checklist == null)
                 return HttpNotFound();
 
-            return View(checklist);
+            if (checklist.AuthorId != User.Identity.GetUserId())
+                return new HttpUnauthorizedResult();
+
+            var tasks = _taskRepository.GetTasksFromChecklist(checklistId.Value);
+
+            return View(new TaskListingViewModel(checklist, tasks));
         }
 
         [Route("checklists/{checklistId}/tasks/new")]
@@ -40,8 +46,14 @@ namespace Checklists.Controllers
             if (checklistId == null)
                 return HttpNotFound();
 
-            if (_checklistRepository.GetChecklist(checklistId.Value) == null)
+
+            var checklist = _checklistRepository.GetChecklist(checklistId.Value);
+
+            if (checklist == null)
                 return HttpNotFound();
+
+            if (checklist.AuthorId != User.Identity.GetUserId())
+                return new HttpUnauthorizedResult();
 
             var task = new Task
             {
@@ -86,6 +98,9 @@ namespace Checklists.Controllers
 
             if (task == null)
                 return HttpNotFound();
+
+            if (task.Checklist.AuthorId != User.Identity.GetUserId())
+                return new HttpUnauthorizedResult();
 
             return View("TaskForm", new TaskFormViewModel(task));
         }
