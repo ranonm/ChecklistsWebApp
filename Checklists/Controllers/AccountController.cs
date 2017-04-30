@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Checklists.Models;
+using Checklists.ViewModels;
 
 namespace Checklists.Controllers
 {
