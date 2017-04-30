@@ -25,7 +25,7 @@ namespace Checklists.Controllers.Apis
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            var checklist = _checklistRepository.GetChecklistById(id);
+            var checklist = _checklistRepository.GetChecklist(id);
 
             if (checklist == null || checklist.IsDeleted)
                 return NotFound();

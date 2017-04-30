@@ -3,27 +3,30 @@ using Checklists.ViewModels;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
+using Checklists.Repositories;
 
 namespace Checklists.Controllers
 {
     public class TasksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IChecklistRepository _checklistRepository;
+        private readonly ITaskRepository _taskRepository;
 
         public TasksController()
         {
             _context = new ApplicationDbContext();
+            _checklistRepository = new ChecklistRepository(_context);
+            _taskRepository = new TaskRepository(_context);
         }
 
         [Route("checklists/{checklistId}/tasks")]
-        public ActionResult Index(int? ChecklistId)
+        public ActionResult Index(int? checklistId)
         {
-            if (ChecklistId == null)
+            if (checklistId == null)
                 return HttpNotFound();
 
-            var checklist = _context.Checklists
-                .Include(c => c.Tasks)
-                .SingleOrDefault(c => c.Id == ChecklistId);
+            var checklist = _checklistRepository.GetChecklistWithTasks(checklistId.Value);
 
             if (checklist == null)
                 return HttpNotFound();
@@ -37,9 +40,7 @@ namespace Checklists.Controllers
             if (checklistId == null)
                 return HttpNotFound();
 
-            var isChecklistExists = _context.Checklists.Any(c => c.Id == checklistId);
-
-            if (!isChecklistExists)
+            if (_checklistRepository.GetChecklist(checklistId.Value) == null)
                 return HttpNotFound();
 
             var task = new Task
@@ -61,12 +62,11 @@ namespace Checklists.Controllers
 
             if (task.Id == 0)
             {
-                _context.Tasks.Add(task);
+                _taskRepository.Add(task);
             }
             else
             {
-                var taskFromDb =
-                    _context.Tasks.SingleOrDefault(t => t.Id == task.Id && t.ChecklistId == task.ChecklistId);
+                var taskFromDb = _taskRepository.GetTaskFromChecklist(task.ChecklistId, task.Id);
 
                 if (taskFromDb == null)
                     return HttpNotFound();
@@ -82,13 +82,12 @@ namespace Checklists.Controllers
         [Route("checklists/{checklistId}/tasks/edit/{id}")]
         public ActionResult Edit(int checklistId, int id)
         {
-            var item = _context.Tasks
-                .SingleOrDefault(i => i.Id == id && i.ChecklistId == checklistId);
+            var task = _taskRepository.GetTaskFromChecklist(checklistId, id);
 
-            if (item == null)
+            if (task == null)
                 return HttpNotFound();
 
-            return View("TaskForm", new TaskFormViewModel(item));
+            return View("TaskForm", new TaskFormViewModel(task));
         }
     }
 }

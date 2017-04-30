@@ -27,7 +27,7 @@ namespace Checklists.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var checklists = _checklistRepository.GetChecklistsCreatedByAuthor(userId);
+            var checklists = _checklistRepository.GetChecklistsCreatedByUser(userId);
 
             return View(checklists);
         }
@@ -61,7 +61,7 @@ namespace Checklists.Controllers
             }
             else
             {
-                var checklist = _checklistRepository.GetChecklistById(viewModel.Id);
+                var checklist = _checklistRepository.GetChecklist(viewModel.Id);
 
                 if (checklist == null)
                     return HttpNotFound();
@@ -79,7 +79,7 @@ namespace Checklists.Controllers
             if (id == null)
                 return HttpNotFound();
 
-            var checklist = _checklistRepository.GetChecklistById(id.Value);
+            var checklist = _checklistRepository.GetChecklist(id.Value);
 
             if (checklist == null)
                 return HttpNotFound();

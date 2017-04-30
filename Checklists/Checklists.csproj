@@ -258,6 +258,8 @@
     <Compile Include="Models\Checklist.cs" />
     <Compile Include="Repositories\ChecklistRepository.cs" />
     <Compile Include="Repositories\IChecklistRepository.cs" />
+    <Compile Include="Repositories\ITaskRepository.cs" />
+    <Compile Include="Repositories\TaskRepository.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Task.cs" />

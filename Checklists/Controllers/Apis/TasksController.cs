@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Checklists.Models;
+using Checklists.Repositories;
 using Microsoft.AspNet.Identity;
 
 namespace Checklists.Controllers.Apis
@@ -14,26 +15,26 @@ namespace Checklists.Controllers.Apis
     public class TasksController : ApiController
     {
         private readonly ApplicationDbContext _context;
+        private readonly ITaskRepository _taskRepository;
 
         public TasksController()
         {
             _context = new ApplicationDbContext();
+            _taskRepository = new TaskRepository(_context);
         }
 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            var item = _context.Tasks
-                .Include(i => i.Checklist)
-                .SingleOrDefault(i => i.Id == id);
+            var task = _taskRepository.GetTaskWithChecklist(id);
 
-            if (item == null)
+            if (task == null)
                 return NotFound();
 
-            if (item.Checklist.AuthorId != User.Identity.GetUserId())
+            if (task.Checklist.AuthorId != User.Identity.GetUserId())
                 return Unauthorized();
 
-            item.Delete();
+            task.Delete();
 
             _context.SaveChanges();
 
@@ -47,7 +48,7 @@ namespace Checklists.Controllers.Apis
             if (id == null)
                 return BadRequest("Requires an id for the to-do item");
 
-            var task = _context.Tasks.Include(i => i.Checklist).SingleOrDefault(i => i.Id == id);
+            var task = _taskRepository.GetTaskWithChecklist(id.Value);
 
             if (task == null)
                 return NotFound();
@@ -72,7 +73,7 @@ namespace Checklists.Controllers.Apis
             if (id == null)
                 return BadRequest("Requires an id for the to-do item");
 
-            var task = _context.Tasks.Include(i => i.Checklist).SingleOrDefault(i => i.Id == id);
+            var task = _taskRepository.GetTaskWithChecklist(id.Value);
 
             if (task == null)
                 return NotFound();
