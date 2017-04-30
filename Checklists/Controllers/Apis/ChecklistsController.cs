@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Checklists.Models;
+using Checklists.Repositories;
 using Microsoft.AspNet.Identity;
 
 namespace Checklists.Controllers.Apis
@@ -13,16 +14,18 @@ namespace Checklists.Controllers.Apis
     public class ChecklistsController : ApiController
     {
         private readonly ApplicationDbContext _context;
+        private readonly IChecklistRepository _checklistRepository;
 
         public ChecklistsController()
         {
             _context = new ApplicationDbContext();
+            _checklistRepository = new ChecklistRepository(_context);
         }
 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            var checklist = _context.Checklists.SingleOrDefault(c => c.Id == id);
+            var checklist = _checklistRepository.GetChecklistById(id);
 
             if (checklist == null || checklist.IsDeleted)
                 return NotFound();
@@ -33,7 +36,7 @@ namespace Checklists.Controllers.Apis
             checklist.Delete();
             _context.SaveChanges();
 
-            return Ok(id);
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

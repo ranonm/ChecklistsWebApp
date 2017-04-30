@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Checklists.Models;
+using Checklists.Repositories;
 using Checklists.ViewModels;
 using Microsoft.AspNet.Identity;
 
@@ -14,19 +15,19 @@ namespace Checklists.Controllers
     public class ChecklistsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IChecklistRepository _checklistRepository;
 
         public ChecklistsController()
         {
             _context = new ApplicationDbContext();
+            _checklistRepository = new ChecklistRepository(_context);
         }
 
         // GET: Checklists
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var checklists = _context.Checklists
-                .Where(c => c.AuthorId == userId && !c.IsDeleted)
-                .ToList();
+            var checklists = _checklistRepository.GetChecklistsCreatedByAuthor(userId);
 
             return View(checklists);
         }
@@ -56,11 +57,11 @@ namespace Checklists.Controllers
                     AuthorId = User.Identity.GetUserId()
                 };
 
-                _context.Checklists.Add(checklist);
+                _checklistRepository.Add(checklist);
             }
             else
             {
-                var checklist = _context.Checklists.SingleOrDefault(c => c.Id == viewModel.Id);
+                var checklist = _checklistRepository.GetChecklistById(viewModel.Id);
 
                 if (checklist == null)
                     return HttpNotFound();
@@ -78,10 +79,13 @@ namespace Checklists.Controllers
             if (id == null)
                 return HttpNotFound();
 
-            var checklist = _context.Checklists.SingleOrDefault(c => c.Id == id);
+            var checklist = _checklistRepository.GetChecklistById(id.Value);
 
             if (checklist == null)
                 return HttpNotFound();
+
+            if (checklist.AuthorId != User.Identity.GetUserId())
+                return new HttpUnauthorizedResult();
 
             var viewModel = new ChecklistFormViewModel(checklist);
 
