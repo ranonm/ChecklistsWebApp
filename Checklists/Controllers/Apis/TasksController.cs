@@ -9,21 +9,17 @@ namespace Checklists.Controllers.Apis
     [Authorize]
     public class TasksController : ApiController
     {
-        private readonly ApplicationDbContext _context;
-        private readonly ITaskRepository _taskRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public TasksController()
         {
-            _context = new ApplicationDbContext();
-            _taskRepository = new TaskRepository(_context);
-            _unitOfWork = new UnitOfWork(_context);
+            _unitOfWork = new UnitOfWork(new ApplicationDbContext());
         }
 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            var task = _taskRepository.GetTaskWithChecklist(id);
+            var task = _unitOfWork.TaskRepository.GetTaskWithChecklist(id);
 
             if (task == null)
                 return NotFound();
@@ -45,7 +41,7 @@ namespace Checklists.Controllers.Apis
             if (id == null)
                 return BadRequest("Requires an id for the to-do item");
 
-            var task = _taskRepository.GetTaskWithChecklist(id.Value);
+            var task = _unitOfWork.TaskRepository.GetTaskWithChecklist(id.Value);
 
             if (task == null)
                 return NotFound();
@@ -70,7 +66,7 @@ namespace Checklists.Controllers.Apis
             if (id == null)
                 return BadRequest("Requires an id for the to-do item");
 
-            var task = _taskRepository.GetTaskWithChecklist(id.Value);
+            var task = _unitOfWork.TaskRepository.GetTaskWithChecklist(id.Value);
 
             if (task == null)
                 return NotFound();

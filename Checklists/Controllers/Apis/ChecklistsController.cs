@@ -9,21 +9,17 @@ namespace Checklists.Controllers.Apis
     [Authorize]
     public class ChecklistsController : ApiController
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IChecklistRepository _checklistRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public ChecklistsController()
         {
-            _context = new ApplicationDbContext();
-            _checklistRepository = new ChecklistRepository(_context);
-            _unitOfWork = new UnitOfWork(_context);
+            _unitOfWork = new UnitOfWork(new ApplicationDbContext());
         }
 
         [HttpDelete]
         public IHttpActionResult Delete(int id)
         {
-            var checklist = _checklistRepository.GetChecklist(id);
+            var checklist = _unitOfWork.ChecklistRepository.GetChecklist(id);
 
             if (checklist == null || checklist.IsDeleted)
                 return NotFound();

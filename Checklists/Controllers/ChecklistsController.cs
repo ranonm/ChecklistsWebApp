@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Checklists.Models;
 using Checklists.Repositories;
 using Checklists.ViewModels;
@@ -14,22 +9,18 @@ namespace Checklists.Controllers
     [Authorize]
     public class ChecklistsController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private readonly IChecklistRepository _checklistRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public ChecklistsController()
         {
-            _context = new ApplicationDbContext();
-            _checklistRepository = new ChecklistRepository(_context);
-            _unitOfWork = new UnitOfWork(_context);
+            _unitOfWork = new UnitOfWork(new ApplicationDbContext());
         }
 
         // GET: Checklists
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            var checklists = _checklistRepository.GetChecklistsCreatedByUser(userId);
+            var checklists = _unitOfWork.ChecklistRepository.GetChecklistsCreatedByUser(userId);
 
             return View(checklists);
         }
@@ -59,11 +50,11 @@ namespace Checklists.Controllers
                     AuthorId = User.Identity.GetUserId()
                 };
 
-                _checklistRepository.Add(checklist);
+                _unitOfWork.ChecklistRepository.Add(checklist);
             }
             else
             {
-                var checklist = _checklistRepository.GetChecklist(viewModel.Id);
+                var checklist = _unitOfWork.ChecklistRepository.GetChecklist(viewModel.Id);
 
                 if (checklist == null)
                     return HttpNotFound();
@@ -81,7 +72,7 @@ namespace Checklists.Controllers
             if (id == null)
                 return HttpNotFound();
 
-            var checklist = _checklistRepository.GetChecklist(id.Value);
+            var checklist = _unitOfWork.ChecklistRepository.GetChecklist(id.Value);
 
             if (checklist == null)
                 return HttpNotFound();
