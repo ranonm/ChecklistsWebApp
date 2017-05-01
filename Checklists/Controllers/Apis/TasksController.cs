@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Web.Http;
 using Checklists.Models;
 using Checklists.Repositories;
@@ -16,11 +11,13 @@ namespace Checklists.Controllers.Apis
     {
         private readonly ApplicationDbContext _context;
         private readonly ITaskRepository _taskRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public TasksController()
         {
             _context = new ApplicationDbContext();
             _taskRepository = new TaskRepository(_context);
+            _unitOfWork = new UnitOfWork(_context);
         }
 
         [HttpDelete]
@@ -36,7 +33,7 @@ namespace Checklists.Controllers.Apis
 
             task.Delete();
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -61,7 +58,7 @@ namespace Checklists.Controllers.Apis
 
             task.Check();
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return Ok();
         }
@@ -86,7 +83,7 @@ namespace Checklists.Controllers.Apis
 
             task.Uncheck();
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
         }

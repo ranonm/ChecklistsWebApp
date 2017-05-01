@@ -208,6 +208,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Migrations\201704231316339_InitialMigration.cs" />
     <Compile Include="Migrations\201704231316339_InitialMigration.Designer.cs">
       <DependentUpon>201704231316339_InitialMigration.cs</DependentUpon>
@@ -260,6 +261,7 @@
     <Compile Include="Repositories\IChecklistRepository.cs" />
     <Compile Include="Repositories\ITaskRepository.cs" />
     <Compile Include="Repositories\TaskRepository.cs" />
+    <Compile Include="UnitOfWork.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Task.cs" />

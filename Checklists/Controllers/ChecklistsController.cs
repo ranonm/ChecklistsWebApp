@@ -16,11 +16,13 @@ namespace Checklists.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IChecklistRepository _checklistRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ChecklistsController()
         {
             _context = new ApplicationDbContext();
             _checklistRepository = new ChecklistRepository(_context);
+            _unitOfWork = new UnitOfWork(_context);
         }
 
         // GET: Checklists
@@ -69,7 +71,7 @@ namespace Checklists.Controllers
                 checklist.Name = viewModel.Name;
             }
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return RedirectToAction("Index");
         }

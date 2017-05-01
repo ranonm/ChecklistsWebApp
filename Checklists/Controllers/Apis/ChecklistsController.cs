@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
 using System.Web.Http;
 using Checklists.Models;
 using Checklists.Repositories;
@@ -15,11 +11,13 @@ namespace Checklists.Controllers.Apis
     {
         private readonly ApplicationDbContext _context;
         private readonly IChecklistRepository _checklistRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ChecklistsController()
         {
             _context = new ApplicationDbContext();
             _checklistRepository = new ChecklistRepository(_context);
+            _unitOfWork = new UnitOfWork(_context);
         }
 
         [HttpDelete]
@@ -34,7 +32,7 @@ namespace Checklists.Controllers.Apis
                 return Unauthorized();
 
             checklist.Delete();
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return StatusCode(HttpStatusCode.NoContent);
         }

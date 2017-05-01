@@ -1,7 +1,5 @@
 ﻿using Checklists.Models;
 using Checklists.ViewModels;
-using System.Data.Entity;
-using System.Linq;
 using System.Web.Mvc;
 using Checklists.Repositories;
 using Microsoft.AspNet.Identity;
@@ -13,12 +11,14 @@ namespace Checklists.Controllers
         private readonly ApplicationDbContext _context;
         private readonly IChecklistRepository _checklistRepository;
         private readonly ITaskRepository _taskRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public TasksController()
         {
             _context = new ApplicationDbContext();
             _checklistRepository = new ChecklistRepository(_context);
             _taskRepository = new TaskRepository(_context);
+            _unitOfWork = new UnitOfWork(_context);
         }
 
         [Route("checklists/{checklistId}/tasks")]
@@ -86,7 +86,7 @@ namespace Checklists.Controllers
                 taskFromDb.Title = task.Title;
             }
 
-            _context.SaveChanges();
+            _unitOfWork.Complete();
 
             return RedirectToAction("Index", new { ChecklistId = task.ChecklistId });
         }
