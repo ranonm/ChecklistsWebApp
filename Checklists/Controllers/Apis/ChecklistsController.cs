@@ -11,9 +11,9 @@ namespace Checklists.Controllers.Apis
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ChecklistsController()
+        public ChecklistsController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork(new ApplicationDbContext());
+            _unitOfWork = unitOfWork;
         }
 
         [HttpDelete]

@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Web.Http;
 using Checklists.Models;
-using Checklists.Repositories;
 using Microsoft.AspNet.Identity;
 
 namespace Checklists.Controllers.Apis
@@ -11,9 +10,9 @@ namespace Checklists.Controllers.Apis
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public TasksController()
+        public TasksController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork(new ApplicationDbContext());
+            _unitOfWork = unitOfWork;
         }
 
         [HttpDelete]

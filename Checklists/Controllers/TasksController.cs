@@ -10,9 +10,9 @@ namespace Checklists.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public TasksController()
+        public TasksController(IUnitOfWork unitOfWork)
         {
-            _unitOfWork = new UnitOfWork(new ApplicationDbContext());
+            _unitOfWork = unitOfWork;
         }
 
         [Route("checklists/{checklistId}/tasks")]
