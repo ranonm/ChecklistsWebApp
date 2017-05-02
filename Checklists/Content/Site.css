@@ -108,11 +108,22 @@ footer {
     position: initial;
 }
 
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #0099CB;
+    border-color: #0099CB;
+}
+
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: #b2dbfb;
+    border-bottom-color: #b2dbfb;
+}
 
 /*
     Override user agent style
 */
-input:-webkit-autofill, 
+input: -webkit-autofill, 
 textarea:-webkit-autofill, 
 select:-webkit-autofill {
     background-color: #fff;
