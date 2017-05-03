@@ -1,7 +1,6 @@
 ﻿using System.Net;
 using System.Web.Http;
-using Checklists.Models;
-using Checklists.Repositories;
+using Checklists.Core;
 using Microsoft.AspNet.Identity;
 
 namespace Checklists.Controllers.Apis

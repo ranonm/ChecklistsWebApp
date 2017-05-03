@@ -1,5 +1,3 @@
-using Checklists.Repositories;
-
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Checklists.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Checklists.App_Start.NinjectWebCommon), "Stop")]
 

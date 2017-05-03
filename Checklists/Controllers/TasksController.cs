@@ -1,7 +1,7 @@
-﻿using Checklists.Models;
-using Checklists.ViewModels;
-using System.Web.Mvc;
-using Checklists.Repositories;
+﻿using System.Web.Mvc;
+using Checklists.Core;
+using Checklists.Core.Models;
+using Checklists.Core.ViewModels;
 using Microsoft.AspNet.Identity;
 
 namespace Checklists.Controllers
