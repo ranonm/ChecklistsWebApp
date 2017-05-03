@@ -284,6 +284,7 @@
     <Compile Include="Repositories\ITaskRepository.cs" />
     <Compile Include="Repositories\TaskRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Task.cs" />
