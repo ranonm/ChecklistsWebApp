@@ -255,10 +255,6 @@
     <Compile Include="Persistence\Migrations\201704260939262_CreateTodoItemEntity.Designer.cs">
       <DependentUpon>201704260939262_CreateTodoItemEntity.cs</DependentUpon>
     </Compile>
-    <Compile Include="Persistence\Migrations\201704260945064_AddTodoItemsToTable.cs" />
-    <Compile Include="Persistence\Migrations\201704260945064_AddTodoItemsToTable.Designer.cs">
-      <DependentUpon>201704260945064_AddTodoItemsToTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Persistence\Migrations\201704280009125_AddIsDeletedPropertyToToDoItemTable.cs" />
     <Compile Include="Persistence\Migrations\201704280009125_AddIsDeletedPropertyToToDoItemTable.Designer.cs">
       <DependentUpon>201704280009125_AddIsDeletedPropertyToToDoItemTable.cs</DependentUpon>
@@ -403,9 +399,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201704260939262_CreateTodoItemEntity.resx">
       <DependentUpon>201704260939262_CreateTodoItemEntity.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Persistence\Migrations\201704260945064_AddTodoItemsToTable.resx">
-      <DependentUpon>201704260945064_AddTodoItemsToTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201704280009125_AddIsDeletedPropertyToToDoItemTable.resx">
       <DependentUpon>201704280009125_AddIsDeletedPropertyToToDoItemTable.cs</DependentUpon>
